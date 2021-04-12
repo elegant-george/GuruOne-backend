@@ -24,3 +24,9 @@ yarn-debug.log*
 yarn-error.log*
 
 nodemon.json
+
+.elasticbeanstalk/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
