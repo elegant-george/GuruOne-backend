@@ -1,5 +1,7 @@
 const multer = require('multer');
 const {v1: uuid} = require('uuid');
+const aws = require('aws-sdk');
+const multerS3 = require('multer-s3');
 
 const MIME_TYPE_MAP = {
   'image/png': 'png',
@@ -7,15 +9,22 @@ const MIME_TYPE_MAP = {
   'image/jpg': 'jpg'
 };
 
+aws.config.update({
+  accessKeyId: `${process.env.AWS_ACCESS_KEY_ID}`,
+  secretAccessKey: `${process.env.AWS_ACCESS_KEY}`,
+  region: `${process.env.AWS_REGION}`
+});
+
+const s3 = new aws.S3();
+
 const fileUpload = dest => multer({
   limits: 500000,
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, dest);
-    },
-    filename: (req, file, cb) => {
-      const ext = MIME_TYPE_MAP[file.mimetype];
-      cb(null, uuid() + '.' + ext);
+  storage: multerS3({
+    s3: s3,
+    bucket: 'guru-one',
+    key: function (req, file, cb) {
+        const ext = MIME_TYPE_MAP[file.mimetype];
+        cb(null, uuid() + '.' + ext);
     }
   }),
   fileFilter: (req, file, cb) => {

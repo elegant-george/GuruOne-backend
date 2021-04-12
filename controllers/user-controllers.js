@@ -40,6 +40,11 @@ const signup = async (req, res, next) => {
 
   const { name, email, password } = req.body;
 
+  let icon;
+  if (req.file.location) {
+     icon = req.file.location;
+  }
+
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
@@ -75,6 +80,7 @@ const signup = async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
+    icon,
     comments: [],
     restaurants: [],
     average: -1

@@ -26,7 +26,7 @@ const createComment = async (req, res, next) => {
 
   let pictures;
   if (req.files.pictures) {
-    pictures = req.files.pictures.map(i => i.path);
+    pictures = req.files.pictures.map(i => i.location);
   };
 
   const createdComment = new Comment({

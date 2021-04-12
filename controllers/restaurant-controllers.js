@@ -59,17 +59,17 @@ const createRestaurant = async (req, res, next) => {
 
   let coverPhoto;
   if (req.files.coverPhoto) {
-     coverPhoto = req.files.coverPhoto.map(i => i.path)[0];
+     coverPhoto = req.files.coverPhoto.map(i => i.location)[0];
   }
 
   let menu;
   if (req.files.menu) {
-    menu = req.files.menu.map(i => i.path);
+    menu = req.files.menu.map(i => i.location);
   };
 
   let pictures;
   if (req.files.pictures) {
-    pictures = req.files.pictures.map(i => i.path);
+    pictures = req.files.pictures.map(i => i.location);
   };
 
   const owner = req.userData.userId;
