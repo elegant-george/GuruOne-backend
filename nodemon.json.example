@@ -1,0 +1,8 @@
+{
+    "env": {
+        "DB_USER": "your mongodb user,
+        "DB_PASSWORD": "your mongodb password",
+        "DB_NAME": "your mongodb database name",
+        "JWT_KEY": "your JWT key or any string you like"
+    }
+}
