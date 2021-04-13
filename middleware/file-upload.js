@@ -22,6 +22,7 @@ const fileUpload = dest => multer({
   storage: multerS3({
     s3: s3,
     bucket: 'guru-one',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
         const ext = MIME_TYPE_MAP[file.mimetype];
         cb(null, uuid() + '.' + ext);
